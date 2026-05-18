@@ -38,47 +38,49 @@ module.exports = async function handler(req, res) {
   }).join('');
 
   const html = `<!DOCTYPE html><html><head><meta charset="utf-8"></head><body>
-    <div style="display:none;max-height:0;overflow:hidden;font-size:1px;line-height:1px;opacity:0;">RSVP დიჯესტი &zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;</div>
-    <div style="font-family:Arial,sans-serif;max-width:640px;margin:0 auto;color:#1f2937;">
-      <div style="background:#0f172a;color:#fff;padding:20px 24px;border-radius:10px 10px 0 0;">
-        <h2 style="margin:0;font-size:20px;">GAHS — RSVP დიჯესტი</h2>
-        <p style="margin:6px 0 0;opacity:0.7;font-size:13px;">${new Date().toLocaleString('ka-GE', { timeZone: 'Asia/Tbilisi' })}</p>
-      </div>
-
-      <table width="100%" style="border:1px solid #e5e7eb;border-top:none;border-collapse:collapse;background:#f8fafc;">
-        <tr style="display:flex; flex-direction:row; gap:2rem">
-          <td style="text-align:center;padding:20px 16px;border-right:1px solid #e5e7eb;">
-            <div style="font-size:32px;font-weight:bold;color:#16a34a;">${confirmed.length}</div>
-            <div style="font-size:13px;color:#6b7280;margin-top:4px;">დადასტურებული</div>
-          </td>
-          <td style="text-align:center;padding:20px 16px;border-right:1px solid #e5e7eb;">
-            <div style="font-size:32px;font-weight:bold;color:#dc2626;">${declined.length}</div>
-            <div style="font-size:13px;color:#6b7280;margin-top:4px;">უარი</div>
-          </td>
-          <td style="text-align:center;padding:20px 16px;border-right:1px solid #e5e7eb;">
-            <div style="font-size:32px;font-weight:bold;color:#2563eb;">${totalGuests}</div>
-            <div style="font-size:13px;color:#6b7280;margin-top:4px;">სულ სტუმარი</div>
-          </td>
-          <td style="text-align:center;padding:20px 16px;">
-            <div style="font-size:32px;font-weight:bold;color:#7c3aed;">${rsvps.length}</div>
-            <div style="font-size:13px;color:#6b7280;margin-top:4px;">სულ პასუხი</div>
-          </td>
-        </tr>
-      </table>
-
-      ${rsvps.length === 0 ? '<p style="padding:24px;text-align:center;color:#6b7280;">პასუხი ჯერ არ არის.</p>' : `
-      <table style="width:100%;border-collapse:collapse;border:1px solid #e5e7eb;border-top:none;">
-        <thead>
-          <tr style="background:#f1f5f9;">
-            <th style="padding:10px 12px;text-align:left;font-size:13px;color:#6b7280;font-weight:600;">სახელი</th>
-            <th style="padding:10px 12px;text-align:center;font-size:13px;color:#6b7280;font-weight:600;">პასუხი</th>
-            <th style="padding:10px 12px;text-align:center;font-size:13px;color:#6b7280;font-weight:600;">სტუმრები</th>
-            <th style="padding:10px 12px;text-align:left;font-size:13px;color:#6b7280;font-weight:600;">თარიღი</th>
+    <div style="display:none;max-height:0;overflow:hidden;font-size:1px;line-height:1px;opacity:0;">RSVP შეჯამება &zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;</div>
+    <table width="100%" cellpadding="0" cellspacing="0" style="font-family:Arial,sans-serif;max-width:640px;margin:0 auto;color:#1f2937;border-collapse:collapse;">
+      <tr><td style="background:#0f172a;color:#fff;padding:20px 24px;border-radius:10px 10px 0 0;">
+        <div style="font-size:20px;font-weight:bold;margin:0;">GAHS — RSVP დიჯესტი</div>
+        <div style="margin-top:6px;opacity:0.7;font-size:13px;">${new Date().toLocaleString('ka-GE', { timeZone: 'Asia/Tbilisi' })}</div>
+      </td></tr>
+      <tr><td style="padding:0;">
+        <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e5e7eb;border-collapse:collapse;background:#f8fafc;">
+          <tr>
+            <td width="25%" style="text-align:center;padding:20px 8px;border-right:1px solid #e5e7eb;">
+              <div style="font-size:32px;font-weight:bold;color:#16a34a;">${confirmed.length}</div>
+              <div style="font-size:12px;color:#6b7280;margin-top:4px;">დადასტურებული</div>
+            </td>
+            <td width="25%" style="text-align:center;padding:20px 8px;border-right:1px solid #e5e7eb;">
+              <div style="font-size:32px;font-weight:bold;color:#dc2626;">${declined.length}</div>
+              <div style="font-size:12px;color:#6b7280;margin-top:4px;">უარი</div>
+            </td>
+            <td width="25%" style="text-align:center;padding:20px 8px;border-right:1px solid #e5e7eb;">
+              <div style="font-size:32px;font-weight:bold;color:#2563eb;">${totalGuests}</div>
+              <div style="font-size:12px;color:#6b7280;margin-top:4px;">სულ სტუმარი</div>
+            </td>
+            <td width="25%" style="text-align:center;padding:20px 8px;">
+              <div style="font-size:32px;font-weight:bold;color:#7c3aed;">${rsvps.length}</div>
+              <div style="font-size:12px;color:#6b7280;margin-top:4px;">სულ პასუხი</div>
+            </td>
           </tr>
-        </thead>
-        <tbody>${rows}</tbody>
-      </table>`}
-    </div></body></html>`;
+        </table>
+      </td></tr>
+      <tr><td style="padding:0;">
+        ${rsvps.length === 0
+          ? '<p style="padding:24px;text-align:center;color:#6b7280;">პასუხი ჯერ არ არის.</p>'
+          : `<table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;border:1px solid #e5e7eb;border-top:none;">
+              <tr style="background:#f1f5f9;">
+                <th style="padding:10px 12px;text-align:left;font-size:13px;color:#6b7280;font-weight:600;">სახელი</th>
+                <th style="padding:10px 12px;text-align:center;font-size:13px;color:#6b7280;font-weight:600;">პასუხი</th>
+                <th style="padding:10px 12px;text-align:center;font-size:13px;color:#6b7280;font-weight:600;">სტუმრები</th>
+                <th style="padding:10px 12px;text-align:left;font-size:13px;color:#6b7280;font-weight:600;">თარიღი</th>
+              </tr>
+              ${rows}
+            </table>`}
+      </td></tr>
+    </table>
+  </body></html>`;
 
   const result = await resend.emails.send({
     from: process.env.FROM_EMAIL,
