@@ -37,7 +37,7 @@ module.exports = async function handler(req, res) {
       </tr>`;
   }).join('');
 
-  const html = `
+  const html = `<!DOCTYPE html><html><head><meta charset="utf-8"></head><body>
     <div style="font-family:Arial,sans-serif;max-width:640px;margin:0 auto;color:#1f2937;">
       <div style="background:#0f172a;color:#fff;padding:20px 24px;border-radius:10px 10px 0 0;">
         <h2 style="margin:0;font-size:20px;">GAHS — RSVP დიჯესტი</h2>
@@ -47,15 +47,15 @@ module.exports = async function handler(req, res) {
       <div style="background:#f8fafc;padding:20px 24px;display:flex;gap:24px;border:1px solid #e5e7eb;border-top:none;">
         <div style="text-align:center;flex:1;">
           <div style="font-size:28px;font-weight:bold;color:#16a34a;">${confirmed.length}</div>
-          <div style="font-size:13px;color:#6b7280;">დადასტურებული</div>
+          <div style="font-size:13px;color:#6b7280;">დასტური</div>
         </div>
         <div style="text-align:center;flex:1;">
           <div style="font-size:28px;font-weight:bold;color:#dc2626;">${declined.length}</div>
-          <div style="font-size:13px;color:#6b7280;">უარყოფილი</div>
+          <div style="font-size:13px;color:#6b7280;">უარი</div>
         </div>
         <div style="text-align:center;flex:1;">
           <div style="font-size:28px;font-weight:bold;color:#2563eb;">${totalGuests}</div>
-          <div style="font-size:13px;color:#6b7280;">სულ სტუმარი</div>
+          <div style="font-size:13px;color:#6b7280;">სტუმარი</div>
         </div>
         <div style="text-align:center;flex:1;">
           <div style="font-size:28px;font-weight:bold;color:#7c3aed;">${rsvps.length}</div>
@@ -75,7 +75,7 @@ module.exports = async function handler(req, res) {
         </thead>
         <tbody>${rows}</tbody>
       </table>`}
-    </div>`;
+    </div></body></html>`;
 
   const result = await resend.emails.send({
     from: process.env.FROM_EMAIL,
