@@ -80,12 +80,13 @@ module.exports = async function handler(req, res) {
             </table>`}
       </td></tr>
     </table>
+    <div style="color:#ffffff;font-size:1px;line-height:1px;">ref-${Date.now()}-${Math.random().toString(36).slice(2)}</div>
   </body></html>`;
 
   const result = await resend.emails.send({
     from: process.env.FROM_EMAIL,
     to: process.env.TO_EMAIL,
-    subject: `GAHS RSVP — ${confirmed.length} დადასტურებული, ${rsvps.length} სულ`,
+    subject: `GAHS RSVP — ${confirmed.length} დადასტურებული, ${rsvps.length} სულ (${new Date().toLocaleString('ka-GE', { timeZone: 'Asia/Tbilisi', day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })})`,
     html,
   });
 
