@@ -30,7 +30,7 @@ module.exports = async function handler(req, res) {
     const date = new Date(r.submittedAt).toLocaleString('ka-GE', { timeZone: 'Asia/Tbilisi' });
     return `
       <tr>
-        <td style="padding:8px 12px;border-bottom:1px solid #e5e7eb;">${full}</td>
+        <td style="padding:8px 12px;border-bottom:1px solid #e5e7eb;white-space:nowrap;">${full}</td>
         <td style="padding:8px 12px;border-bottom:1px solid #e5e7eb;text-align:center;">${att}</td>
         <td style="padding:8px 12px;border-bottom:1px solid #e5e7eb;text-align:center;">${gc}</td>
         <td style="padding:8px 12px;border-bottom:1px solid #e5e7eb;color:#6b7280;font-size:12px;">${date}</td>
@@ -38,30 +38,33 @@ module.exports = async function handler(req, res) {
   }).join('');
 
   const html = `<!DOCTYPE html><html><head><meta charset="utf-8"></head><body>
+    <div style="display:none;max-height:0;overflow:hidden;font-size:1px;line-height:1px;opacity:0;">RSVP დიჯესტი &zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;</div>
     <div style="font-family:Arial,sans-serif;max-width:640px;margin:0 auto;color:#1f2937;">
       <div style="background:#0f172a;color:#fff;padding:20px 24px;border-radius:10px 10px 0 0;">
         <h2 style="margin:0;font-size:20px;">GAHS — RSVP დიჯესტი</h2>
         <p style="margin:6px 0 0;opacity:0.7;font-size:13px;">${new Date().toLocaleString('ka-GE', { timeZone: 'Asia/Tbilisi' })}</p>
       </div>
 
-      <div style="background:#f8fafc;padding:20px 24px;display:flex;gap:24px;border:1px solid #e5e7eb;border-top:none;">
-        <div style="text-align:center;flex:1;">
-          <div style="font-size:28px;font-weight:bold;color:#16a34a;">${confirmed.length}</div>
-          <div style="font-size:13px;color:#6b7280;">დასტური</div>
-        </div>
-        <div style="text-align:center;flex:1;">
-          <div style="font-size:28px;font-weight:bold;color:#dc2626;">${declined.length}</div>
-          <div style="font-size:13px;color:#6b7280;">უარი</div>
-        </div>
-        <div style="text-align:center;flex:1;">
-          <div style="font-size:28px;font-weight:bold;color:#2563eb;">${totalGuests}</div>
-          <div style="font-size:13px;color:#6b7280;">სტუმარი</div>
-        </div>
-        <div style="text-align:center;flex:1;">
-          <div style="font-size:28px;font-weight:bold;color:#7c3aed;">${rsvps.length}</div>
-          <div style="font-size:13px;color:#6b7280;">სულ პასუხი</div>
-        </div>
-      </div>
+      <table width="100%" style="border:1px solid #e5e7eb;border-top:none;border-collapse:collapse;background:#f8fafc;">
+        <tr style="display:flex; flex-direction:row; gap:2rem">
+          <td style="text-align:center;padding:20px 16px;border-right:1px solid #e5e7eb;">
+            <div style="font-size:32px;font-weight:bold;color:#16a34a;">${confirmed.length}</div>
+            <div style="font-size:13px;color:#6b7280;margin-top:4px;">დადასტურებული</div>
+          </td>
+          <td style="text-align:center;padding:20px 16px;border-right:1px solid #e5e7eb;">
+            <div style="font-size:32px;font-weight:bold;color:#dc2626;">${declined.length}</div>
+            <div style="font-size:13px;color:#6b7280;margin-top:4px;">უარი</div>
+          </td>
+          <td style="text-align:center;padding:20px 16px;border-right:1px solid #e5e7eb;">
+            <div style="font-size:32px;font-weight:bold;color:#2563eb;">${totalGuests}</div>
+            <div style="font-size:13px;color:#6b7280;margin-top:4px;">სულ სტუმარი</div>
+          </td>
+          <td style="text-align:center;padding:20px 16px;">
+            <div style="font-size:32px;font-weight:bold;color:#7c3aed;">${rsvps.length}</div>
+            <div style="font-size:13px;color:#6b7280;margin-top:4px;">სულ პასუხი</div>
+          </td>
+        </tr>
+      </table>
 
       ${rsvps.length === 0 ? '<p style="padding:24px;text-align:center;color:#6b7280;">პასუხი ჯერ არ არის.</p>' : `
       <table style="width:100%;border-collapse:collapse;border:1px solid #e5e7eb;border-top:none;">
